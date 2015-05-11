@@ -10,6 +10,7 @@ docker-compose  1.2.0+ - https://docs.docker.com/compose/
 
 Install Docker and Docker Compose, and then build a base image - I don't want to rely on anyone elses so I cook mine like thus:
 
+```
  #!/bin/sh
 
  # build a minimal image and import into private Docker registry
@@ -27,7 +28,7 @@ Install Docker and Docker Compose, and then build a base image - I don't want to
  sudo docker images
  sudo docker tag $IID dragon.local.net:5000/ubuntu
  sudo docker push dragon.local.net:5000/ubuntu
-
+```
 
 ## build individual containers
 
