@@ -1,0 +1,37 @@
+elasticsearch:
+  image: elasticsearch_img
+  hostname: elasticsearch
+  dns:
+    - "192.168.1.77"
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  expose:
+    - "9200"
+    - "9300"
+  volumes_from:
+    - "elasticdata"
+#elasticdata:
+#  image: trusty
+#  volumes:
+#    - /data
+#  command: echo "elasticdata volume"
+logstash:
+  image: logstash_img
+  hostname: logstash
+  dns:
+    - "192.168.1.77"
+  links:
+    - "elasticsearch"
+  volumes:
+    - ~/code/docker/logstash/config:/etc/logstash
+    - ~/code/docker/logstash/data:/data
+kibana:
+  image: kibana_img
+  hostname: kibana
+  dns:
+    - "192.168.1.77"
+  links:
+    - "elasticsearch"
+  ports:
+    - "5601:80"
